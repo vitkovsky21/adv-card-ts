@@ -7,6 +7,7 @@ import sdelka from "../assets/sdelka-grey.png";
 
 function Cards() {
   const [cardData, setCardData] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     api.get("/products").then((res) => {
@@ -19,15 +20,28 @@ function Cards() {
   }
 
   const cards = cardData.map((card: any) => {
-    
-    let randomNumber = Math.floor(Math.random()*10); 
+    let randomNumber = Math.floor(Math.random() * 100);
+    let date = new Date(card.date * 1000);
 
     return (
       <div className="card" key={card.id}>
         <div className="header">
-          <div className="header__wallpaper">
-            <img src={`https://source.unsplash.com/random?sig=${randomNumber}`} alt="" />
+          <div
+            style={{ display: loading ? "block" : "none" }}
+            className="lds-dual-ring"
+          >
           </div>
+          <div
+            style={{ display: loading ? "none" : "block" }}
+            className="header__wallpaper"
+          >
+            <img
+              src={`https://source.unsplash.com/random?sig=${randomNumber}`}
+              alt="#"
+              onLoad={() => setLoading(false)}
+            />
+          </div>
+
           <div className="header__logo">
             <img src="" alt="" />
             <img src="" alt="" />
@@ -36,18 +50,31 @@ function Cards() {
         <div className="content">
           <div className="content__first-block">
             <div className="price">
-              <p className="price__old">0 000 ₽</p>
-              <p className="price__new">0 000 ₽</p>
+              <p className="price__old">{card.oldPrice}</p>
+              <p className="price__new">{card.price}</p>
             </div>
             <div className="card-logo">
               <img src={dostavka} alt="#" />
               <img src={sdelka} alt="#" />
             </div>
           </div>
-          <p className="content__card-title">Название товарной позиции</p>
+
+          <p className="content__card-title">{card.title}</p>
+
           <div className="content__last-part">
-            <p className="city">Город</p>
-            <p className="date">00.00.00, 00.00</p>
+            <p className="city">{card.locality.substring(0, 15)}</p>
+            <p className="date">
+              {date.toLocaleDateString([], {
+                year: "numeric",
+                month: "numeric",
+                day: "numeric",
+              })}
+              ,{" "}
+              {date.toLocaleTimeString([], {
+                hour: "2-digit",
+                minute: "2-digit",
+              })}
+            </p>
           </div>
         </div>
       </div>
@@ -57,9 +84,7 @@ function Cards() {
   return (
     <div className="container">
       <h2 className="title">Похожие объявления</h2>
-      <div className="cards">
-        {cards}
-      </div>
+      <div className="cards">{cards}</div>
     </div>
   );
 }
