@@ -107,16 +107,30 @@ html {
 .card-logo {
   position: relative;
   bottom: 2.2rem;
-  right: 2.8rem;
-  width: 20px;
+  right: 0.3rem;
+  width: 60px;
   display: flex;
   justify-content: space-between;
 }
 
-.card-logo img {
+.card-logo__dostavka {
+  background: no-repeat url("./assets/dostavka-grey.png");
   width: 24px;
   height: 24px;
   margin: 0 0.2rem;
+}
+.card-logo__dostavka:hover {
+  background: no-repeat url("./assets/dostavka-green.png");
+}
+
+.card-logo__sdelka {
+  background: no-repeat url("./assets/sdelka-grey.png");
+  width: 24px;
+  height: 24px;
+  margin: 0 0.2rem;
+}
+.card-logo__sdelka:hover {
+  background: no-repeat url("./assets/sdelka-green.png");
 }
 
 .content__card-title {
@@ -161,18 +175,17 @@ html {
   font-weight: 400;
   font-size: 12px;
   line-height: 14px;
-  /* identical to box height */
 
   color: #8f8f8f;
 }
 
 .lds-dual-ring {
-  display:flex;
+  display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
   top: 5rem;
-  left: 4rem;
+  left: 4.2rem;
   width: 80px;
   height: 80px;
 }

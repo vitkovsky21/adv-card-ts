@@ -2,9 +2,6 @@ import "../App.css";
 import React, { useEffect, useState } from "react";
 import api from "../http-common";
 
-import dostavka from "../assets/dostavka-grey.png";
-import sdelka from "../assets/sdelka-grey.png";
-
 function Cards() {
   const [cardData, setCardData] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
@@ -54,8 +51,8 @@ function Cards() {
               <p className="price__new">{card.price}</p>
             </div>
             <div className="card-logo">
-              <img src={dostavka} alt="#" />
-              <img src={sdelka} alt="#" />
+              <div className="card-logo__dostavka"></div>
+              <div className="card-logo__sdelka"></div>
             </div>
           </div>
 
