@@ -1,9 +1,13 @@
 import "../App.css";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/pagination";
+import { Pagination } from "swiper";
 import api from "../http-common";
 
 import { Charts, Dostavka, HeaderLogo, Like, Sdelka } from "../styled/Logo";
-import { Header, Wallpaper } from "../styled/Header";
+import { Header } from "../styled/Header";
 import { Spinner } from "../styled/Spinner";
 import {
   CardLogo,
@@ -21,11 +25,12 @@ import {
 import { Card, CardsBlock, Container, Title } from "../styled/Container";
 
 let randomNumberArr: any[] = [];
+let bottomToggler: boolean = false;
 
 function Cards() {
   const [cardData, setCardData] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
-  const [visited, setVisited] = useState<any>([]);
+  const [visited, setVisited] = useState<any[]>([]);
 
   useEffect(() => {
     api.get("/products").then((res) => {
@@ -50,25 +55,60 @@ function Cards() {
   }
 
   const cards = cardData.map((card: any) => {
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight && card.id >= 100 && !bottomToggler) {
+      alert("hello");
+      bottomToggler = true;
+    }
     let date = new Date(card.date * 1000);
 
     return (
       <Card
-        onClick={() => visitCard(card.id)}
+        onMouseOver={() => visitCard(card.id)}
         style={{ background: !visited.includes(card.id) ? "#FFF" : "#FFF6A5" }}
         key={card.id}
       >
         <Header>
           <Spinner style={{ display: loading ? "block" : "none" }}></Spinner>
-          <Wallpaper style={{ display: loading ? "none" : "block" }}>
-            <img
-              src={`https://source.unsplash.com/random?sig=${
-                randomNumberArr[card.id]
-              }`}
-              alt="#"
-              onLoad={() => setLoading(false)}
-            />
-          </Wallpaper>
+          <Swiper
+            pagination={true}
+            modules={[Pagination]}
+            className="mySwiper"
+            style={{ display: loading ? "none" : "block" }}
+          >
+            <SwiperSlide>
+              <img
+                src={`https://source.unsplash.com/random?sig=${
+                  randomNumberArr[card.id]
+                }`}
+                alt="#"
+              />
+            </SwiperSlide>
+            <SwiperSlide>
+              <img
+                src={`https://source.unsplash.com/random?sig=${
+                  randomNumberArr[card.id] + 21
+                }`}
+                alt="#"
+              />
+            </SwiperSlide>
+            <SwiperSlide>
+              <img
+                src={`https://source.unsplash.com/random?sig=${
+                  randomNumberArr[card.id] + 32
+                }`}
+                alt="#"
+              />
+            </SwiperSlide>
+            <SwiperSlide>
+              <img
+                src={`https://source.unsplash.com/random?sig=${
+                  randomNumberArr[card.id] + 23
+                }`}
+                alt="#"
+                onLoad={() => setLoading(false)}
+              />
+            </SwiperSlide>
+          </Swiper>
 
           <HeaderLogo>
             <Charts style={{ display: loading ? "none" : "flex" }}></Charts>

@@ -118,4 +118,6 @@ export const VisitMsg = styled.div`
   color: #ffffff;
   background: rgba(44, 44, 44, 0.74);
   border-radius: 8px;
+  
+  z-index: 4000;
 `;

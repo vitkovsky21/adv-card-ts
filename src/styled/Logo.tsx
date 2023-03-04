@@ -48,6 +48,7 @@ export const Charts = styled.div`
   width: 24px;
   height: 24px;
   margin: 0 0.2rem;
+  z-index: 4000;
 
   &:hover {
     background: no-repeat url(${chartsGreen});
@@ -59,6 +60,7 @@ export const Like = styled.div`
   width: 24px;
   height: 24px;
   margin: 0 0.2rem;
+  z-index: 4000;
 
   &:hover {
     background: no-repeat url(${likeGreen});

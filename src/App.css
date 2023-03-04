@@ -5,3 +5,28 @@ html {
   max-width: 100%;
   overflow-x: hidden;
 }
+
+.swiper {
+  width: 224px;
+  height: 260px;
+  object-fit: cover;
+  border-radius: 8px 8px 0px 0px;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: grab;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
