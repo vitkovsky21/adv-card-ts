@@ -6,7 +6,7 @@ import "./App.css";
 function App() {
   window.onscroll = function () {
     if (window.innerHeight + window.scrollY >= document.body.scrollHeight) {
-      alert("No more cards available");
+      alert("No more available cards");
     }
   };
 
