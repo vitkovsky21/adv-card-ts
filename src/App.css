@@ -50,6 +50,8 @@ html {
   box-shadow: 0px 0px 20px;
   border: 0px solid rgba(0, 0, 0, 0.1);
   border-radius: 8px;
+
+  cursor: pointer;
 }
 
 .header {
@@ -62,6 +64,61 @@ html {
   height: 260px;
   object-fit: cover;
   border-radius: 8px 8px 0px 0px;
+}
+
+.header__logo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+  bottom: 5.2rem;
+  left: 5.5rem;
+  height: 60px;
+}
+
+.header__logo .like {
+  background: no-repeat url("./assets/like.png");
+  width: 24px;
+  height: 24px;
+  margin: 0 0.2rem;
+}
+.header__logo .like:hover {
+  background: no-repeat url("./assets/like-green.png");
+}
+
+.header__logo .charts {
+  background: no-repeat url("./assets/charts.png");
+  width: 24px;
+  height: 24px;
+  margin: 0 0.2rem;
+}
+.header__logo .charts:hover {
+  background: no-repeat url("./assets/charts-green.png");
+}
+
+.visited {
+  display: none;
+  justify-content: center;
+  align-items: center;
+
+  position: relative;
+  bottom: 22.7rem;
+  left: 4.1rem;
+
+  width: 94px;
+  height: 20px;
+
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
+
+  text-align: center;
+
+  color: #ffffff;
+  background: rgba(44, 44, 44, 0.74);
+  border-radius: 8px;
 }
 
 .content {
