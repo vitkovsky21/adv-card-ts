@@ -1,6 +1,24 @@
 import "../App.css";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import api from "../http-common";
+
+import { Charts, Dostavka, HeaderLogo, Like, Sdelka } from "../styled/Logo";
+import { Header, Wallpaper } from "../styled/Header";
+import { Spinner } from "../styled/Spinner";
+import {
+  CardLogo,
+  CardTitle,
+  City,
+  Content,
+  FirstBlock,
+  LastPart,
+  NewPrice,
+  OldPrice,
+  Price,
+  ProductDate,
+  VisitMsg,
+} from "../styled/Content";
+import { Card, CardsBlock, Container, Title } from "../styled/Container";
 
 let randomNumberArr: any[] = [];
 
@@ -17,9 +35,9 @@ function Cards() {
 
   function visitCard(id: number) {
     if (!visited) {
-      setVisited([id])
+      setVisited([id]);
     } else {
-      setVisited((oldVisited: any) => [...oldVisited, id])
+      setVisited((oldVisited: any) => [...oldVisited, id]);
     }
   }
 
@@ -32,55 +50,48 @@ function Cards() {
   }
 
   const cards = cardData.map((card: any) => {
-    // let randomNumber = Math.floor(Math.random() * 100);
     let date = new Date(card.date * 1000);
 
     return (
-      <div onClick={() => visitCard(card.id)} style={{ background: !visited.includes(card.id) ? "#FFF" : "#FFF6A5" }} className="card" key={card.id}>
-        <div className="header">
-          <div
-            style={{ display: loading ? "block" : "none" }}
-            className="lds-dual-ring"
-          ></div>
-          <div
-            style={{ display: loading ? "none" : "block" }}
-            className="header__wallpaper"
-          >
+      <Card
+        onClick={() => visitCard(card.id)}
+        style={{ background: !visited.includes(card.id) ? "#FFF" : "#FFF6A5" }}
+        key={card.id}
+      >
+        <Header>
+          <Spinner style={{ display: loading ? "block" : "none" }}></Spinner>
+          <Wallpaper style={{ display: loading ? "none" : "block" }}>
             <img
-              src={`https://source.unsplash.com/random?sig=${randomNumberArr[card.id]}`}
+              src={`https://source.unsplash.com/random?sig=${
+                randomNumberArr[card.id]
+              }`}
               alt="#"
               onLoad={() => setLoading(false)}
             />
-          </div>
+          </Wallpaper>
 
-          <div className="header__logo">
-            <div
-              style={{ display: loading ? "none" : "flex" }}
-              className="charts"
-            ></div>
-            <div
-              style={{ display: loading ? "none" : "flex" }}
-              className="like"
-            ></div>
-          </div>
-        </div>
-        <div className="content">
-          <div className="content__first-block">
-            <div className="price">
-              <p className="price__old">{card.oldPrice} ₽</p>
-              <p className="price__new">{card.price} ₽</p>
-            </div>
-            <div className="card-logo">
-              <div className="card-logo__dostavka"></div>
-              <div className="card-logo__sdelka"></div>
-            </div>
-          </div>
+          <HeaderLogo>
+            <Charts style={{ display: loading ? "none" : "flex" }}></Charts>
+            <Like style={{ display: loading ? "none" : "flex" }}></Like>
+          </HeaderLogo>
+        </Header>
+        <Content>
+          <FirstBlock>
+            <Price>
+              <OldPrice>{card.oldPrice} ₽</OldPrice>
+              <NewPrice>{card.price} ₽</NewPrice>
+            </Price>
+            <CardLogo>
+              <Dostavka></Dostavka>
+              <Sdelka></Sdelka>
+            </CardLogo>
+          </FirstBlock>
 
-          <p className="content__card-title">{card.title}</p>
+          <CardTitle>{card.title}</CardTitle>
 
-          <div className="content__last-part">
-            <p className="city">{card.locality.substring(0, 15)}</p>
-            <p className="date">
+          <LastPart>
+            <City>{card.locality.substring(0, 15)}</City>
+            <ProductDate>
               {date.toLocaleDateString([], {
                 year: "numeric",
                 month: "numeric",
@@ -91,20 +102,24 @@ function Cards() {
                 hour: "2-digit",
                 minute: "2-digit",
               })}
-            </p>
-          </div>
-          
-          <div style={{ display: !visited.includes(card.id) ? "hidden" : "flex" }} className="visited">Просмотрено</div>
-        </div>
-      </div>
+            </ProductDate>
+          </LastPart>
+
+          <VisitMsg
+            style={{ display: !visited.includes(card.id) ? "hidden" : "flex" }}
+          >
+            Просмотрено
+          </VisitMsg>
+        </Content>
+      </Card>
     );
   });
 
   return (
-    <div className="container">
-      <h2 className="title">Похожие объявления</h2>
-      <div className="cards">{cards}</div>
-    </div>
+    <Container>
+      <Title>Похожие объявления</Title>
+      <CardsBlock>{cards}</CardsBlock>
+    </Container>
   );
 }
 

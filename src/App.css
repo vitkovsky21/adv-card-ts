@@ -136,31 +136,6 @@ html {
   top: 1.4rem;
 }
 
-.price__old {
-  margin-left: 0.9rem;
-  position: relative;
-  bottom: 0.8rem;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 16px;
-  text-decoration: line-through;
-
-  color: #5a5a5a;
-}
-
-.price__new {
-  margin-left: 0.7rem;
-  position: relative;
-  bottom: 2rem;
-  font-style: normal;
-  font-weight: 700;
-  font-size: 22px;
-  line-height: 25px;
-
-  color: #2c2c2c;
-}
-
 .card-logo {
   position: relative;
   bottom: 2.2rem;
