@@ -1,5 +1,5 @@
 import "../App.css";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
@@ -25,7 +25,6 @@ import {
 import { Card, CardsBlock, Container, Title } from "../styled/Container";
 
 let randomNumberArr: any[] = [];
-let bottomToggler: boolean = false;
 
 function Cards() {
   const [cardData, setCardData] = useState<any[]>([]);
@@ -33,6 +32,7 @@ function Cards() {
   const [visited, setVisited] = useState<any[]>([]);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     api.get("/products").then((res) => {
       setCardData(res.data);
     });
@@ -55,10 +55,6 @@ function Cards() {
   }
 
   const cards = cardData.map((card: any) => {
-    if (window.innerHeight + window.scrollY >= document.body.offsetHeight && card.id >= 100 && !bottomToggler) {
-      alert("hello");
-      bottomToggler = true;
-    }
     let date = new Date(card.date * 1000);
 
     return (
