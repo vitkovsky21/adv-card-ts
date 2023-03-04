@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import Cards from "./pages/Cards";
 
 import "./App.css";
